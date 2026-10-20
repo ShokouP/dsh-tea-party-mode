@@ -1,0 +1,10 @@
+# local dev sources / OS noise
+_src/
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
+Thumbs.db
+
+# release build artifacts (regenerate with tools/build_client.py)
+# lib/client.js is committed because dsh needs it at install time

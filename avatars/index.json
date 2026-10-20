@@ -1,0 +1,13 @@
+{
+  "characters": [
+    { "id": "deepseek", "name": "DeepSeek", "model": "DeepSeek", "avatar": "deepseek.png", "round": "deepseek-round.png", "source": "community", "file": "deepseek-c.webp" },
+    { "id": "chatgpt", "name": "ChatGPT", "model": "ChatGPT / OpenAI", "avatar": "chatgpt.png", "round": "chatgpt-round.png", "source": "community", "file": "gpt.webp" },
+    { "id": "claude", "name": "Claude", "model": "Claude / Anthropic", "avatar": "claude.png", "round": "claude-round.png", "source": "community", "file": "claude.webp" },
+    { "id": "gemini", "name": "Gemini", "model": "Gemini / Google", "avatar": "gemini.png", "round": "gemini-round.png", "source": "community", "file": "gemini.webp" },
+    { "id": "qwen", "name": "千问", "model": "通义千问 / 阿里", "avatar": "qwen.png", "round": "qwen-round.png", "source": "community", "file": "qwen.webp" },
+    { "id": "kimi", "name": "Kimi", "model": "月之暗面", "avatar": "kimi.png", "round": "kimi-round.png", "source": "community", "file": "kimi.webp" },
+    { "id": "doubao", "name": "豆包", "model": "豆包 / 字节", "avatar": "doubao.png", "round": "doubao-round.png", "source": "official-icon", "file": "doubao-official.jpg" },
+    { "id": "glm", "name": "GLM", "model": "智谱", "avatar": "glm.png", "round": "glm-round.png", "source": "official-icon", "file": "glm-official.jpg" }
+  ],
+  "note": "8 张 512x512 PNG；round 为圆形透明版。来源与授权见 CREDITS.md。"
+}

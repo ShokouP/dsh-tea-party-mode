@@ -1,0 +1,39 @@
+{
+  "name": "dsh-tea-party-mode",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "description": "角色茶话会模式 — 一个和极简模式、创造模式并列的 Agent 预设：8 位大模型娘在深夜茶会上轮流接话，并在每条回复下显示出场角色的小头像（纯聊天，不调用工具）。",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": []
+    }
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./lib/client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./avatars/*.png": "./avatars/*.png",
+    "./avatars/index.json": "./avatars/index.json",
+    "./avatars/CREDITS.md": "./avatars/CREDITS.md"
+  },
+  "files": [
+    "index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "avatars/*.png",
+    "avatars/index.json",
+    "avatars/CREDITS.md"
+  ],
+  "license": "MIT"
+}
