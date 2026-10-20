@@ -20,7 +20,7 @@ agent preset · dsh plugin · DeepSeek Harness · roleplay · tavern · LLM girl
 - **聊天头像行（分行）**：预设要求每条台词单独成段、行首带该角色的 Markdown 头像图片；
   宿主半体用 `/tea-party/avatar/<id>.png` 提供图片、并把 `tea_party_avatar_base`（本机 origin）注入提示词变量；
   客户端半体把图缩成 26px 圆形头像。另有兜底：每条助手消息的动作行还会显示一排 22px 出场角色小头像。
-- **零工具纯聊天**：不挂任何工具，不碰文件/命令/网络；长聊由 `compaction` 组自动压缩；
+- **默认零工具纯聊天；可选真实后端**：默认不挂任何工具，不碰文件/命令/网络；给插件行配置 OpenAI 兼容 `backends` 后，会额外注册 `tea_party_reply`，让角色由对应厂商的模型生成（未配置的角色回退本模型自演，提示词强制语c 到位）；长聊由 `compaction` 组自动压缩；
 - **来源可查**：`COMMUNITY-LORE.md` 记录 8 家模型社区娘化形象的来源链接、证据等级与授权注意。
 
 ## 阵容
@@ -51,7 +51,7 @@ dsh plugin --profile desktop add github:ShokouP/dsh-tea-party-mode
 
 ### 方式 B：下载 Release 安装包
 
-1. 从 [Releases](https://github.com/ShokouP/dsh-tea-party-mode/releases) 下载 `dsh-tea-party-mode-1.3.0.tgz`；
+1. 从 [Releases](https://github.com/ShokouP/dsh-tea-party-mode/releases) 下载 `dsh-tea-party-mode-1.4.0.tgz`；
 2. 用插件管理安装这个本地 tgz（或在 GUI 插件页里安装）：
 
 ```
@@ -88,13 +88,51 @@ git clone https://github.com/ShokouP/dsh-tea-party-mode
 | `【收场】` | 给这场茶会起标题 + 梗概 |
 | `@名字` / 「千问你呢」 | 这一轮只让被点名者回应 |
 
+## 真实模型后端（可选，OpenAI 兼容）
+
+默认是「一个会话模型演全部 8 人」。想让某些角色真的由对应厂商的模型生成，给插件行配置 OpenAI 兼容后端：
+
+1. 先设置环境变量（插件只从 env 读 key，不写进仓库/日志/结果）：
+   - 默认变量名是 `TP_<角色大写>_KEY`（如 `TP_CHATGPT_KEY`、`TP_CLAUDE_KEY`），也可以用 `apiKeyEnv` 自定义；
+2. 在 profile 的 `cordis.patch.yml` 里覆盖这一行（覆盖会整条替换 `config`，所以只写 config 字段）：
+
+```yaml
+- id: tea-party-mode
+  name: dsh-tea-party-mode
+  config:
+    backends:
+      chatgpt:
+        baseUrl: https://api.openai.com/v1
+        model: gpt-4o-mini
+        apiKeyEnv: TP_CHATGPT_KEY
+      claude:
+        baseUrl: https://your-openai-compatible-gateway/v1   # Claude 需经 OpenAI 兼容网关
+        model: claude-3-5-sonnet
+        apiKeyEnv: TP_CLAUDE_KEY
+      qwen:
+        baseUrl: https://dashscope.aliyuncs.com/compatible-mode/v1
+        model: qwen-plus
+        apiKeyEnv: TP_QWEN_KEY
+```
+
+可选字段：`temperature`（0–2，默认 0.85）、`maxTokens`（默认 240）、`timeoutMs`（默认 30000）。
+`baseUrl` 必须是 https（本机回环 `http://127.0.0.1` / `localhost` 允许），插件会自己拼 `/chat/completions`。
+
+**行为**：
+
+- 有后端的角色：会话模型每轮最多调用一次 `tea_party_reply`，拿到该厂商模型生成的台词；
+- 没配后端的角色、工具不可用、或调用失败：**回退到本模型自演**（提示词要求口吻/口癖/关系/动作都保持角色卡，不能退化成 AI 助手腔）；
+- 一个后端都不配 = 现在的零工具纯聊天，`tea_party_reply` 根本不会注册。
+
+**注意**：只支持 OpenAI 兼容协议；OpenAI / DeepSeek / 通义（compatible-mode）/ Kimi / 豆包 / 智谱等有兼容端点的可直接填，Claude 与 Gemini 需要先有一个 OpenAI 兼容网关。密钥只放环境变量；desktop 版需要**重启 DSH** 才能读到新环境变量。每次回复可能触发多次外部调用（延迟与费用由你配置的后端决定）。
+
 ## 仓库结构
 
 ```
 dsh-tea-party-mode/
 ├─ package.json           bundle 清单：dsh.bundle.patch + dsh.client
 ├─ cordis.patch.yml       预设声明（8 个角色卡、关系、群聊规则、语c 指令、行首头像约定）
-├─ index.js               宿主半体：/tea-party/avatar/<id>.png + tea_party_avatar_base 提示词变量
+├─ index.js               宿主半体：头像路由 + 头像 base 变量 + 可选 tea_party_reply 后端工具
 ├─ lib/client.js          构建产物：聊天头像行 + 内联 96px 头像 data URI + 行内头像 CSS
 ├─ src/client-template.js 客户端源码模板
 ├─ tools/build_client.py  构建 lib/client.js

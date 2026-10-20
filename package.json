@@ -1,10 +1,10 @@
 {
   "name": "dsh-tea-party-mode",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "type": "module",
   "main": "index.js",
-  "description": "角色茶话会模式 — 一个和极简模式、创造模式并列的 Agent 预设：8 位大模型娘在深夜茶会上轮流接话，并在每条回复下显示出场角色的小头像（纯聊天，不调用工具）。",
+  "description": "角色茶话会模式 — 和极简/创造并列的 Agent 预设：8 位大模型娘围桌语c，行首带角色头像；默认零工具，可选接 OpenAI 兼容后端让角色真实调用各家模型（未配置的角色由本模型自演）。",
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
