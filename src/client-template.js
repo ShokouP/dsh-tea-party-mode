@@ -34,6 +34,12 @@ window.__ModuleLoader__.load({
       '.tp-av-chip:hover{transform:translateY(-2px) scale(1.08)}',
       '.tp-av-chip img{width:100%;height:100%;object-fit:cover;display:block}',
       '.tp-av-more{font-size:10px;color:var(--dsw-alias-label-secondary,rgba(255,255,255,.6));margin-left:2px}',
+      // Inline avatars emitted by the preset as Markdown images: shrink them to
+      // avatar size instead of the default contained preview.
+      'img[src*="/tea-party/avatar/"]{width:26px!important;height:26px!important;border-radius:50%;object-fit:cover;',
+      'vertical-align:middle;margin-right:6px;display:inline-block!important;box-shadow:0 1px 3px rgba(0,0,0,.35)}',
+      'a[href*="/tea-party/avatar/"]{display:inline-flex!important;vertical-align:middle;margin-right:6px}',
+      'figure:has(img[src*="/tea-party/avatar/"]){display:inline-flex!important;margin:0 6px 0 0!important;max-width:26px}',
     ].join('');
 
     function mountStyle(ctx) {

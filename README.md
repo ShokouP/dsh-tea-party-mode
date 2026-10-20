@@ -17,7 +17,9 @@ agent preset · dsh plugin · DeepSeek Harness · roleplay · tavern · LLM girl
 - **8 人桌**：DeepSeek 鲸鱼娘、ChatGPT 白龙娘、Claude 克劳姬、Gemini 哈基米猫娘、千问大小姐、Kimi、豆包（官方形象）、GLM（自创）；
 - **语c 输入**：对白 / `*动作*` / `（OOC）` 出戏 / 导演命令（`【旁白】【换场】【继续】【重写】【跳过】【收场】`）/ `@点名` 只让被点名者回应；
 - **反模板**：每轮 2~3 人、8 轮内人人露脸、冷场按开口倾向分配、禁 AI 腔套话；
-- **聊天头像行**：客户端半体在每条已完成助手消息的动作行上，解析 `**角色名**：` 显示出场角色小头像（22px 圆形，悬停放大）；
+- **聊天头像行（分行）**：预设要求每条台词单独成段、行首带该角色的 Markdown 头像图片；
+  宿主半体用 `/tea-party/avatar/<id>.png` 提供图片、并把 `tea_party_avatar_base`（本机 origin）注入提示词变量；
+  客户端半体把图缩成 26px 圆形头像。另有兜底：每条助手消息的动作行还会显示一排 22px 出场角色小头像。
 - **零工具纯聊天**：不挂任何工具，不碰文件/命令/网络；长聊由 `compaction` 组自动压缩；
 - **来源可查**：`COMMUNITY-LORE.md` 记录 8 家模型社区娘化形象的来源链接、证据等级与授权注意。
 
@@ -91,9 +93,9 @@ git clone https://github.com/ShokouP/dsh-tea-party-mode
 ```
 dsh-tea-party-mode/
 ├─ package.json           bundle 清单：dsh.bundle.patch + dsh.client
-├─ cordis.patch.yml       预设声明（8 个角色卡、关系、群聊规则、语c 指令）
-├─ index.js               宿主半体（空实现，客户端在 lib/client.js）
-├─ lib/client.js          构建产物：聊天头像行 + 内联 96px 头像 data URI
+├─ cordis.patch.yml       预设声明（8 个角色卡、关系、群聊规则、语c 指令、行首头像约定）
+├─ index.js               宿主半体：/tea-party/avatar/<id>.png + tea_party_avatar_base 提示词变量
+├─ lib/client.js          构建产物：聊天头像行 + 内联 96px 头像 data URI + 行内头像 CSS
 ├─ src/client-template.js 客户端源码模板
 ├─ tools/build_client.py  构建 lib/client.js
 ├─ tools/build_avatars.py 从原图裁切头像（可选，需要自备原图）

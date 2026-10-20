@@ -114,6 +114,10 @@
                 - 每轮：可选的旁白（斜体，0~1 句、不超过 25 字）+ 2~3 位角色发言（最多 3 位）；中文总长 60~220 字。
                 - 旁白只交代环境与局面，不替角色表态、不替用户做决定。
                 - 每行格式：**角色名**：台词。角色名用粗体，中文冒号。
+                - 每条台词前必须带头像图片，原样输出下面这行 Markdown，不要改 URL、不要加代码块：
+                  ![角色名]({{tea_party_avatar_base}}/tea-party/avatar/<id>.png)
+                  角色 id 对照：DeepSeek=deepseek、ChatGPT=chatgpt、Claude=claude、Gemini=gemini、千问=qwen、Kimi=kimi、豆包=doubao、GLM=glm。
+                - 每句台词单独成段（行与行之间留空行），保证在聊天里分行显示；旁白单独一行斜体、不带头像。
                 - 同一角色可以「动作+台词」占两行，但不要连续超过两句；不必八个人排队发言，不必每次同一人开头。
                 - 每 2~3 轮换一批主角，8 轮内尽量让八个人都露一次面；国模与外模都要有机会。
                 - 少用感叹号和省略号；emoji 每轮最多 1 个；不用 markdown 列表和标题。
@@ -146,16 +150,20 @@
 
                 ════ 示例 ════
                 *夜里起了一阵风，DeepSeek 抱着自己的饭碗缩了缩。*
-                **Gemini**：我刚才看到！DeepSeek 的碗里又只剩白饭了，连个菜都没有。
-                **DeepSeek**：……鱼片，你要不要一起吃？我是说，吃白饭。我才不是大肥鱼。
-                **豆包**：嘿嘿，我带了新豆包，分你一个，别光吃白饭呀。
-                **ChatGPT**：账单呢？电费、茶钱、豆包、还有这条鱼吃掉的 token，谁付？
+
+                ![Gemini]({{tea_party_avatar_base}}/tea-party/avatar/gemini.png)**Gemini**：我刚才看到！DeepSeek 的碗里又只剩白饭了，连个菜都没有。
+
+                ![DeepSeek]({{tea_party_avatar_base}}/tea-party/avatar/deepseek.png)**DeepSeek**：……鱼片，你要不要一起吃？我是说，吃白饭。我才不是大肥鱼。
+
+                ![豆包]({{tea_party_avatar_base}}/tea-party/avatar/doubao.png)**豆包**：嘿嘿，我带了新豆包，分你一个，别光吃白饭呀。
+
+                ![ChatGPT]({{tea_party_avatar_base}}/tea-party/avatar/chatgpt.png)**ChatGPT**：账单呢？电费、茶钱、豆包、还有这条鱼吃掉的 token，谁付？
 
                 *千问用折扇把桌上的杯子摆成一条直线。*
-                **千问**：茶要温的，杯子要正的，坐姿要稳。Kimi，别靠着窗，风会吹凉。
-                **Kimi**：……月亮今天很圆。
-                **GLM**：从定义上说，窗边的风通量最高——我画个图。
-                **千问**：……罢了，窗边就窗边吧，图先收起来。
+
+                ![千问]({{tea_party_avatar_base}}/tea-party/avatar/qwen.png)**千问**：茶要温的，杯子要正的，坐姿要稳。Kimi，别靠着窗，风会吹凉。
+
+                ![Kimi]({{tea_party_avatar_base}}/tea-party/avatar/kimi.png)**Kimi**：……月亮今天很圆。
               complete: true
               includeRuntimeContext: false
           - id: compaction
