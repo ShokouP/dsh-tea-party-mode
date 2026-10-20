@@ -51,7 +51,7 @@ dsh plugin --profile desktop add github:ShokouP/dsh-tea-party-mode
 
 ### 方式 B：下载 Release 安装包
 
-1. 从 [Releases](https://github.com/ShokouP/dsh-tea-party-mode/releases) 下载 `dsh-tea-party-mode-1.2.0.tgz`；
+1. 从 [Releases](https://github.com/ShokouP/dsh-tea-party-mode/releases) 下载 `dsh-tea-party-mode-1.3.0.tgz`；
 2. 用插件管理安装这个本地 tgz（或在 GUI 插件页里安装）：
 
 ```
