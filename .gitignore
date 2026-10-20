@@ -6,5 +6,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-# release build artifacts (regenerate with tools/build_client.py)
+# release build artifacts
+*.tgz
+
 # lib/client.js is committed because dsh needs it at install time
